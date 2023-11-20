@@ -1,7 +1,9 @@
 import pyblockworld
 
-from wall import Wall
 from roof import Roof
+from wall import Wall
+from wall_with_door import WallWithDoor
+from wall_with_window import WallWithWindow
 
 
 class House:
@@ -14,14 +16,19 @@ class House:
     # Die Komposition ist eine Sonderform der Aggregation.
     # Sie drückt aus, dass die Teile von der Existenz des Ganzen abhängig sind.
 
-    def __init__(self, wallFront: Wall, wallLeft: Wall, wallRight: Wall, wallBack: Wall, pos: tuple, roof: Roof, bw: pyblockworld.World):
-        self.wallFront: Wall = wallFront
-        self.wallLeft: Wall = wallLeft
-        self.wallRight: Wall = wallRight
-        self.wallBack: Wall = wallBack
-        self.pos: () = pos
-        self.roof: Roof = roof
-        self.__bw: pyblockworld.World = bw
+    def __init__(self, pos: tuple, bw: pyblockworld.World):
+        self.pos = pos
+        self.__bw = bw
+        self.wallFront = WallWithDoor(bw=self.__bw, pos=self.pos)
+        self.wallLeft = WallWithWindow(bw=self.__bw, pos=self.pos, rotated=True)
+        x, y, z = self.pos
+        right_wall_position = x + self.wallFront.width, y, z
+        self.wallRight = WallWithWindow(bw=self.__bw, pos=right_wall_position, rotated=True)
+        back_wall_position = x, y, z + self.wallRight.width
+        self.wallBack = Wall(bw=self.__bw, pos=back_wall_position)
+        y += self.wallLeft.height
+        roof_pos = x, y, z
+        self.roof = Roof(bw=self.__bw, pos=roof_pos)
 
     def build(self):
         self.wallFront.build()
