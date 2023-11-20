@@ -16,10 +16,8 @@ class Wall:
         x, y, z = self.pos
         x += 1
         if self.rotated:
-            print("wall rotated")
             self._bw.setBlocks(x, -1, z, x, y + self.height, z + self.width, self.material_id)
         else:
-            print("wall")
             self._bw.setBlocks(x, -1, z, x + self.width, y + self.height, z, self.material_id)
 
     def set_block(self, bw):

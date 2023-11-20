@@ -15,9 +15,7 @@ class WallWithDoor(Wall):
         x += 1
         door_position = self.width / 2
         if self.rotated:
-            print("rotated with door")
             self._bw.setBlocks(x, y-1, z + door_position, x, y+1, z + door_position, self.door_material_id)
         else:
-            print("with door")
             self._bw.setBlocks(x+door_position, y-1, z, x + door_position, y +1, z, self.door_material_id)
 

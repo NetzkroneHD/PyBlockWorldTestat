@@ -20,7 +20,6 @@ def b_key_pressed(world: World):
         wall = Wall(pos=world.player_position(), bw=world)
         wall_rotated.build()
         wall.build()
-
     elif type == 3:
         wall_rotated = WallWithDoor(pos=world.player_position(), bw=world, rotated=True)
         wall = WallWithDoor(pos=world.player_position(), bw=world)

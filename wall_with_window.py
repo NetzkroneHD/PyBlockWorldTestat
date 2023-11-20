@@ -25,8 +25,6 @@ class WallWithWindow(Wall):
             window_height = 1
         window_start_pos = self.width / 2
         if self.rotated:
-            print("rotated with window")
             self._bw.setBlocks(x, y, z + window_start_pos, x, y + window_height, z + window_width, self.window_material_id)
         else:
-            print("with window")
             self._bw.setBlocks(x+window_start_pos, y, z, x+window_height, y + window_height, z, self.window_material_id)
