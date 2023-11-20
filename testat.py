@@ -45,6 +45,3 @@ world.build_key_pressed = b_key_pressed
 # Die Welt wird gestartet
 world.run()
 
-world = World()
-world.build_key_pressed = b_key_pressed
-world.run()
